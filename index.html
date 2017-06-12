@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini planets</title>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/aframe/0.5.0/aframe.js"></script>
+    <script src="components/planet.js?a=5"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+    <script>
+      (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+    </script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+      varying vec3 vNormal; void main() { vNormal = normalize( normalMatrix * normal ); gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-vertex">
+      varying vec3 vNormal; void main() { float intensity = pow( 0.7 - dot( vNormal, vec3( 0.0, 0.0, 1.0 ) ), 4.0 ); gl_FragColor = vec4( 0.0, 0.3, 1.0, 1.0 ) * intensity; }
+    </script>
+      <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.min.js'></script> -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/lib/alea.js'></script>
+    <script src='https://codepen.io/clindsey/pen/egQpvE.js'></script>
+    <script src='https://cdn.rawgit.com/jwagner/simplex-noise.js/87440528bcf8ec89840e974d8f76cfe3da548c37/simplex-noise.min.js'></script>
+
+        <!-- <script src="js/index.js"></script> -->
+
+
+
+
+
+    <a-scene>
+
+      <a-entity>
+
+        <a-entity position="0 0 -600" rotation="15 0 0">
+          <a-entity>
+            <a-animation attribute="rotation" dur="25000" from="0 0 0" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
+            <a-entity planet position="0 0 -300">
+          </a-entity>
+        </a-entity>
+      </a-entity>
+
+
+        <a-entity position="0 0 -400" rotation="0 0 -30">
+          <a-entity planet="radius:12; seed:123; noiseFactor: 1.0">
+            <a-animation attribute="rotation" dur="25000" from="0 0 0"  to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+
+    </a-scene>
+
+  </body>
+</html>
